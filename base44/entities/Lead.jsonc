@@ -1,0 +1,58 @@
+{
+  "name": "Lead",
+  "type": "object",
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone Number"
+    },
+    "capitalAvailable": {
+      "type": "string",
+      "title": "Capital Available",
+      "enum": [
+        "Under $100K",
+        "$100K \u2013 $300K",
+        "$300K \u2013 $500K",
+        "$500K \u2013 $1M",
+        "$1M+"
+      ]
+    },
+    "previousThailandInvestment": {
+      "type": "boolean",
+      "title": "Previous Thailand Investment"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he"
+      ],
+      "title": "Language"
+    },
+    "source": {
+      "type": "string",
+      "title": "Source Page"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "contacted",
+        "qualified",
+        "closed"
+      ],
+      "default": "new",
+      "title": "Status"
+    }
+  },
+  "required": [
+    "fullName",
+    "phone",
+    "capitalAvailable",
+    "previousThailandInvestment"
+  ]
+}

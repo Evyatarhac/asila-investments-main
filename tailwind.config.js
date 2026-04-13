@@ -4,12 +4,25 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+      fontFamily: {
+        heading: ['var(--font-heading)'],
+        body: ['var(--font-body)'],
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+        'asila-dark': '#0A1628',
+        'asila-navy': '#0F2040',
+        'asila-surface': '#162B52',
+        'asila-blue': '#1B3A6B',
+        'asila-mid': '#2E5B9A',
+        'asila-light': '#4A7AB5',
+        'asila-accent': '#7BA7C8',
+        'asila-text': '#F0F4F8',
+        'asila-muted': '#9BB3C8',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -63,20 +76,12 @@ module.exports = {
   		},
   		keyframes: {
   			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
+  				from: { height: '0' },
+  				to: { height: 'var(--radix-accordion-content-height)' }
   			},
   			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
+  				from: { height: 'var(--radix-accordion-content-height)' },
+  				to: { height: '0' }
   			}
   		},
   		animation: {
