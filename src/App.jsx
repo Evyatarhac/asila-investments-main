@@ -15,16 +15,12 @@ import Contact from './pages/Contact';
 import SplashScreen from './components/SplashScreen';
 import ScrollToTop from './components/ScrollToTop';
 
-const AuthenticatedApp = () => {
+const AuthenticatedApp = ({ splashDone }) => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-asila-dark">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
+  // While splash is showing OR auth is loading, show nothing (splash covers the screen)
+  if (!splashDone || isLoadingPublicSettings || isLoadingAuth) {
+    return null;
   }
 
   // Handle authentication errors
@@ -32,7 +28,6 @@ const AuthenticatedApp = () => {
     if (authError.type === 'user_not_registered') {
       return <UserNotRegisteredError />;
     } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
       navigateToLogin();
       return null;
     }
@@ -61,12 +56,12 @@ function App() {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        {/* Splash renders on top; app loads silently behind it */}
+        {/* Splash renders on top while app loads behind it */}
         {!splashDone && <SplashScreen onDone={handleSplashDone} />}
 
         <Router>
           <ScrollToTop />
-          <AuthenticatedApp />
+          <AuthenticatedApp splashDone={splashDone} />
         </Router>
         <Toaster />
       </QueryClientProvider>
