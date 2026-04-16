@@ -138,7 +138,7 @@ export default function ProjectDetail() {
                     className="flex-shrink-0 w-56 aspect-[4/3] bg-asila-surface border border-asila-blue/10 overflow-hidden"
                   >
                     {img ? (
-                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" width="224" height="168" />
+                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" width="224" height="168" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}
@@ -157,7 +157,7 @@ export default function ProjectDetail() {
                     }`}
                   >
                     {img ? (
-                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" width="400" height="300" />
+                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}
