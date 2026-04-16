@@ -10,7 +10,7 @@ import projects from "../lib/projects";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
 
-export default function Home() {
+export default function Home({ onVideoReady }) {
   const { t, lang } = useOutletContext();
   const [filter, setFilter] = useState("all");
 
@@ -36,6 +36,7 @@ export default function Home() {
             muted
             loop
             playsInline
+            onCanPlayThrough={() => onVideoReady?.()}
           />
         </div>
         {/* Overlay */}

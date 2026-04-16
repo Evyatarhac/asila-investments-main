@@ -15,7 +15,7 @@ import Contact from './pages/Contact';
 import SplashScreen from './components/SplashScreen';
 import ScrollToTop from './components/ScrollToTop';
 
-const AuthenticatedApp = ({ splashDone }) => {
+const AuthenticatedApp = ({ splashDone, onVideoReady }) => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
   // While splash is showing OR auth is loading, show nothing (splash covers the screen)
@@ -37,7 +37,7 @@ const AuthenticatedApp = ({ splashDone }) => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home onVideoReady={onVideoReady} />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/about" element={<About />} />
@@ -51,17 +51,19 @@ const AuthenticatedApp = ({ splashDone }) => {
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const handleSplashDone = useCallback(() => setSplashDone(true), []);
+  const handleVideoReady = useCallback(() => setVideoReady(true), []);
 
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         {/* Splash renders on top while app loads behind it */}
-        {!splashDone && <SplashScreen onDone={handleSplashDone} />}
+        {!splashDone && <SplashScreen onDone={handleSplashDone} videoReady={videoReady} />}
 
         <Router>
           <ScrollToTop />
-          <AuthenticatedApp splashDone={splashDone} />
+          <AuthenticatedApp splashDone={splashDone} onVideoReady={handleVideoReady} />
         </Router>
         <Toaster />
       </QueryClientProvider>
