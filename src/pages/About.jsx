@@ -65,7 +65,7 @@ export default function About() {
           {/* Image */}
           <ScrollFade delay={0.2}>
             <img
-              src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/888bc014c_WhatsAppImage2026-04-16at132508.jpg"
+              src="/images/sunset/07.jpg"
               alt="Asila Invest — Koh Phangan"
               className="w-full aspect-[3/4] object-cover"
             />
@@ -100,7 +100,7 @@ export default function About() {
             {/* Photo */}
             <ScrollFade>
               <img
-                src="/images/eden.jpeg"
+                src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/888bc014c_WhatsAppImage2026-04-16at132508.jpg"
                 alt="Eden Asila"
                 className="w-full aspect-[3/4] object-cover object-top"
               />
