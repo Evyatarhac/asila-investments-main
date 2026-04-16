@@ -94,9 +94,19 @@ export default function ProjectDetail() {
               </h2>
 
               <div className="space-y-4 mb-8">
-                <DetailRow label={t.projects.location} value={project.location} />
+                {project.details && project.details[lang] && (
+                  <>
+                    <DetailRow label={lang === "he" ? "מספר וילות" : "Number of Villas"} value={project.details[lang].villas} />
+                    <DetailRow label={lang === "he" ? "סוג" : "Type"} value={project.details[lang].type} />
+                    <DetailRow label={t.projects.location} value={project.details[lang].locationDetail || project.location} />
+                    <DetailRow label={lang === "he" ? "חדרי שינה" : "Bedrooms"} value={project.details[lang].bedrooms} />
+                    <DetailRow label={lang === "he" ? "בריכה פרטית" : "Private Pool"} value={project.details[lang].pool} />
+                    {project.details[lang].features && (
+                      <DetailRow label={lang === "he" ? "מאפיינים" : "Key Features"} value={project.details[lang].features} />
+                    )}
+                  </>
+                )}
                 <DetailRow label={t.projects.status} value={getStatusLabel(project.status, lang)} />
-                <DetailRow label={t.projects.year} value={project.year} />
               </div>
 
               <div className="border-t border-asila-blue/20 pt-6">

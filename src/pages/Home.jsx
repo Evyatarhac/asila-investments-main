@@ -111,21 +111,21 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section className="bg-asila-page text-asila-body" dir={lang === "he" ? "rtl" : "ltr"}>
+      <section className="bg-asila-navy/50" dir={lang === "he" ? "rtl" : "ltr"}>
         {/* Company */}
         <div className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start">
             <ScrollFade>
-              <h2 className="font-heading text-3xl md:text-4xl font-medium text-asila-navy mb-6">
+              <h2 className="font-heading text-3xl md:text-4xl font-medium text-white mb-6">
                 {t.about.companyTitle}
               </h2>
-              <div className="w-16 h-[2px] bg-asila-gold mb-8" />
+              <div className="w-16 h-[2px] bg-asila-gold/60 mb-8" />
               <div className="space-y-5">
                 {(t.about.companyParagraphs || []).map((para, i) => (
                   <p
                     key={i}
-                    className={`font-body text-sm md:text-base leading-relaxed text-asila-body/85 ${
-                      i === 0 ? "text-base md:text-lg font-medium text-asila-body" : ""
+                    className={`font-body text-sm md:text-base leading-relaxed text-asila-muted ${
+                      i === 0 ? "text-base md:text-lg font-medium text-asila-text" : ""
                     }`}
                   >
                     {para}
@@ -136,14 +136,11 @@ export default function Home() {
             </ScrollFade>
 
             <ScrollFade delay={0.2}>
-              <div className="relative">
-                <div className={`absolute -top-3 ${lang === "he" ? "-left-3" : "-right-3"} w-full h-full border border-asila-gold/30 pointer-events-none`} />
-                <img
-                  src="/images/sunset/07.jpg"
-                  alt="Asila Invest — Koh Phangan"
-                  className="w-full aspect-[3/4] object-cover"
-                />
-              </div>
+              <img
+                src="/images/sunset/07.jpg"
+                alt="Asila Invest — Koh Phangan"
+                className="w-full aspect-[3/4] object-cover"
+              />
             </ScrollFade>
           </div>
         </div>
@@ -151,9 +148,9 @@ export default function Home() {
         {/* Divider */}
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-gray-200" />
-            <div className="w-1.5 h-1.5 bg-asila-gold rotate-45" />
-            <div className="flex-1 h-px bg-gray-200" />
+            <div className="flex-1 h-px bg-asila-blue/30" />
+            <div className="w-1.5 h-1.5 bg-asila-gold/60 rotate-45" />
+            <div className="flex-1 h-px bg-asila-blue/30" />
           </div>
         </div>
 
@@ -161,32 +158,29 @@ export default function Home() {
         <div className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <ScrollFade>
-              <p className="font-body text-xs uppercase tracking-[0.25em] text-asila-gold mb-3">
+              <p className="font-body text-xs uppercase tracking-[0.25em] text-asila-gold/80 mb-3">
                 {lang === "he" ? "הכירו את המייסד" : "Meet the Founder"}
               </p>
-              <h2 className="font-heading text-3xl md:text-5xl font-medium text-asila-navy mb-10">
+              <h2 className="font-heading text-3xl md:text-5xl font-medium text-white mb-10">
                 {t.about.founderTitle}
               </h2>
             </ScrollFade>
 
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 md:gap-16 items-start">
               <ScrollFade>
-                <div className="relative">
-                  <div className={`absolute -top-3 ${lang === "he" ? "-right-3" : "-left-3"} w-full h-full border border-asila-gold/25 pointer-events-none`} />
-                  <img
-                    src="/images/eden.jpeg"
-                    alt="Eden Asila"
-                    className="w-full aspect-[3/4] object-cover object-top"
-                  />
-                </div>
+                <img
+                  src="/images/eden.jpeg"
+                  alt="Eden Asila"
+                  className="w-full aspect-[3/4] object-cover object-top"
+                />
               </ScrollFade>
 
               <ScrollFade delay={0.15}>
                 <div className="space-y-5 mt-2">
                   {(t.about.founderBioItems || []).map((item, i) => (
                     <div key={i} className={`flex gap-4 ${lang === "he" ? "flex-row-reverse" : ""}`}>
-                      <div className="mt-2 flex-shrink-0 w-1.5 h-1.5 bg-asila-gold rotate-45" />
-                      <p className="font-body text-sm md:text-base leading-relaxed text-asila-body/80">
+                      <div className="mt-2 flex-shrink-0 w-1.5 h-1.5 bg-asila-gold/60 rotate-45" />
+                      <p className="font-body text-sm md:text-base leading-relaxed text-asila-muted">
                         {item}
                       </p>
                     </div>
