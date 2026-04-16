@@ -27,13 +27,16 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="relative h-[100svh] flex items-end justify-center overflow-hidden">
-        {/* Video placeholder */}
+        {/* Hero Video */}
         <div className="absolute inset-0 bg-asila-dark">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-64 h-40 md:w-96 md:h-56 border border-asila-blue/20 flex items-center justify-center text-asila-muted/30 text-xs font-body animate-pulse">
-              VIDEO PLACEHOLDER — 1920×1080
-            </div>
-          </div>
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/hero.mov"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
         </div>
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-asila-dark via-asila-dark/60 to-transparent" />
@@ -45,7 +48,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="flex justify-center mb-8">
-              <Logo size="lg" />
+              <Logo size="lg" showImage={false} />
             </div>
             <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wide mb-4">
               {t.hero.headline}
@@ -55,7 +58,7 @@ export default function Home() {
             </p>
             <a
               href="#projects"
-              className="inline-block bg-asila-light hover:bg-asila-mid text-white font-body text-sm tracking-wide px-8 py-3.5 md:px-10 md:py-4 w-full md:w-auto min-h-[52px] flex items-center justify-center transition-colors"
+              className="inline-flex items-center justify-center bg-asila-light hover:bg-asila-mid text-white font-body text-sm tracking-wide px-8 py-3.5 md:px-10 md:py-4 w-full md:w-auto min-h-[52px] transition-colors"
             >
               {t.hero.cta}
             </a>
@@ -104,6 +107,94 @@ export default function Home() {
           {filtered.map((project) => (
             <ProjectCard key={project.slug} project={project} lang={lang} t={t} />
           ))}
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="bg-asila-page text-asila-body" dir={lang === "he" ? "rtl" : "ltr"}>
+        {/* Company */}
+        <div className="py-16 md:py-24 px-4 md:px-8">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start">
+            <ScrollFade>
+              <h2 className="font-heading text-3xl md:text-4xl font-medium text-asila-navy mb-6">
+                {t.about.companyTitle}
+              </h2>
+              <div className="w-16 h-[2px] bg-asila-gold mb-8" />
+              <div className="space-y-5">
+                {(t.about.companyParagraphs || []).map((para, i) => (
+                  <p
+                    key={i}
+                    className={`font-body text-sm md:text-base leading-relaxed text-asila-body/85 ${
+                      i === 0 ? "text-base md:text-lg font-medium text-asila-body" : ""
+                    }`}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+
+            </ScrollFade>
+
+            <ScrollFade delay={0.2}>
+              <div className="relative">
+                <div className={`absolute -top-3 ${lang === "he" ? "-left-3" : "-right-3"} w-full h-full border border-asila-gold/30 pointer-events-none`} />
+                <img
+                  src="/images/sunset/07.jpg"
+                  alt="Asila Invest — Koh Phangan"
+                  className="w-full aspect-[3/4] object-cover"
+                />
+              </div>
+            </ScrollFade>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <div className="flex items-center gap-4">
+            <div className="flex-1 h-px bg-gray-200" />
+            <div className="w-1.5 h-1.5 bg-asila-gold rotate-45" />
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
+        </div>
+
+        {/* Founder */}
+        <div className="py-16 md:py-24 px-4 md:px-8">
+          <div className="max-w-5xl mx-auto">
+            <ScrollFade>
+              <p className="font-body text-xs uppercase tracking-[0.25em] text-asila-gold mb-3">
+                {lang === "he" ? "הכירו את המייסד" : "Meet the Founder"}
+              </p>
+              <h2 className="font-heading text-3xl md:text-5xl font-medium text-asila-navy mb-10">
+                {t.about.founderTitle}
+              </h2>
+            </ScrollFade>
+
+            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 md:gap-16 items-start">
+              <ScrollFade>
+                <div className="relative">
+                  <div className={`absolute -top-3 ${lang === "he" ? "-right-3" : "-left-3"} w-full h-full border border-asila-gold/25 pointer-events-none`} />
+                  <img
+                    src="/images/eden.jpeg"
+                    alt="Eden Asila"
+                    className="w-full aspect-[3/4] object-cover object-top"
+                  />
+                </div>
+              </ScrollFade>
+
+              <ScrollFade delay={0.15}>
+                <div className="space-y-5 mt-2">
+                  {(t.about.founderBioItems || []).map((item, i) => (
+                    <div key={i} className={`flex gap-4 ${lang === "he" ? "flex-row-reverse" : ""}`}>
+                      <div className="mt-2 flex-shrink-0 w-1.5 h-1.5 bg-asila-gold rotate-45" />
+                      <p className="font-body text-sm md:text-base leading-relaxed text-asila-body/80">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </ScrollFade>
+            </div>
+          </div>
         </div>
       </section>
 

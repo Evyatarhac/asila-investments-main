@@ -23,6 +23,12 @@ module.exports = {
         'asila-accent': '#7BA7C8',
         'asila-text': '#F0F4F8',
         'asila-muted': '#9BB3C8',
+        'asila-gold': '#C9A84C',
+        'asila-gold-light': '#E8D5A0',
+        'asila-cream': '#F8F6F1',
+        'asila-page': '#FFFFFF',
+        'asila-body': '#1A1A1A',
+        'asila-subtle': '#6B7280',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import projects, { getStatusLabel } from "../lib/projects";
 import Breadcrumb from "../components/Breadcrumb";
@@ -16,6 +16,7 @@ const statusColors = {
 export default function ProjectDetail() {
   const { t, lang } = useOutletContext();
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const isRTL = lang === "he";
 
   const urlParams = new URLSearchParams(window.location.search);
   const slug = window.location.pathname.split("/").pop();
@@ -162,7 +163,7 @@ export default function ProjectDetail() {
             to="/projects"
             className="inline-flex items-center gap-2 text-asila-light text-sm font-body hover:text-white transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            {isRTL ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />}
             {t.projects.backToProjects}
           </Link>
         </div>

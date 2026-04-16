@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 
-export default function Navbar({ t, lang, toggleLang }) {
+export default function Navbar({ t, lang, toggleLang, isRTL }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -34,6 +34,7 @@ export default function Navbar({ t, lang, toggleLang }) {
   return (
     <>
       <nav
+        dir={isRTL ? "rtl" : "ltr"}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-asila-dark/95 backdrop-blur-md border-b border-asila-light/20"
@@ -41,8 +42,8 @@ export default function Navbar({ t, lang, toggleLang }) {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="relative z-10">
-            <Logo size="sm" />
+          <Link to="/" className="relative z-10 flex items-center">
+            <Logo size="sm" showText={false} />
           </Link>
 
           {/* Desktop nav */}
@@ -81,9 +82,9 @@ export default function Navbar({ t, lang, toggleLang }) {
 
       {/* Mobile full-screen menu */}
       {menuOpen && (
-        <div className="fixed inset-0 z-[100] bg-asila-dark flex flex-col">
+        <div className="fixed inset-0 z-[100] bg-asila-dark flex flex-col" dir={isRTL ? "rtl" : "ltr"}>
           <div className="flex items-center justify-between px-4 h-16">
-            <Logo size="sm" />
+            <Logo size="sm" showText={false} />
             <button
               onClick={() => setMenuOpen(false)}
               className="p-2 text-white min-h-[48px] min-w-[48px] flex items-center justify-center"
