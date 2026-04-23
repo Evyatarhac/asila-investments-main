@@ -27,7 +27,7 @@ export default function Footer({ t }) {
               office@asila.co.il
             </a>
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/edenasilaa?igsh=MXUwMGdmeHk3c3Vhbw%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-asila-muted hover:text-white transition-colors text-sm"

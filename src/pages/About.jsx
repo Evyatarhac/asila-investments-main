@@ -135,7 +135,7 @@ export default function About() {
                   054-5889256
                 </a>
                 <a
-                  href="https://instagram.com/"
+                  href="https://www.instagram.com/edenasilaa?igsh=MXUwMGdmeHk3c3Vhbw%3D%3D&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-asila-muted hover:text-white text-sm font-body transition-colors group"
