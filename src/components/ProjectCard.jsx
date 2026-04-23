@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { getStatusLabel } from "../lib/projects";
+import SmartImage from "./SmartImage";
 
 const statusColors = {
   completed: "bg-asila-mid/30 text-asila-accent",
@@ -25,9 +26,10 @@ export default function ProjectCard({ project, lang, t }) {
       >
         <div className="relative overflow-hidden aspect-[16/9] md:aspect-[4/3] bg-asila-surface">
           {project.heroImage ? (
-            <img
+            <SmartImage
               src={project.heroImage}
               alt={project.name}
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               loading="lazy"
               width="400"

@@ -6,6 +6,7 @@ import Logo from "../components/Logo";
 import ProjectCard from "../components/ProjectCard";
 import LeadForm from "../components/LeadForm";
 import ScrollFade from "../components/ScrollFade";
+import SmartImage from "../components/SmartImage";
 import projects from "../lib/projects";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
@@ -31,11 +32,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-asila-dark">
           <video
             className="absolute inset-0 w-full h-full object-cover"
-            src="/hero.mov"
+            src="/hero.mp4"
+            poster="/hero-poster.jpg"
             autoPlay
             muted
             loop
             playsInline
+            preload="metadata"
           />
         </div>
         {/* Overlay */}
@@ -138,9 +141,10 @@ export default function Home() {
             <ScrollFade delay={0.2}>
               <div className="relative">
                 <div className={`absolute -top-3 ${lang === "he" ? "-left-3" : "-right-3"} w-full h-full border border-asila-gold/30 pointer-events-none`} />
-                <img
+                <SmartImage
                   src="/images/sunset/07.jpg"
                   alt="Asila Invest — Koh Phangan"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="w-full aspect-[3/4] object-cover"
                 />
               </div>
@@ -173,9 +177,10 @@ export default function Home() {
               <ScrollFade>
                 <div className="relative">
                   <div className={`absolute -top-3 ${lang === "he" ? "-right-3" : "-left-3"} w-full h-full border border-asila-gold/25 pointer-events-none`} />
-                  <img
+                  <SmartImage
                     src="/images/eden.jpeg"
                     alt="Eden Asila"
+                    sizes="(min-width: 768px) 300px, 100vw"
                     className="w-full aspect-[3/4] object-cover object-top"
                   />
                 </div>

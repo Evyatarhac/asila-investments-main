@@ -6,6 +6,7 @@ import projects, { getStatusLabel } from "../lib/projects";
 import Breadcrumb from "../components/Breadcrumb";
 import Lightbox from "../components/Lightbox";
 import ScrollFade from "../components/ScrollFade";
+import SmartImage from "../components/SmartImage";
 
 const statusColors = {
   completed: "bg-asila-mid/30 text-asila-accent",
@@ -43,10 +44,13 @@ export default function ProjectDetail() {
       <section className="relative h-[60vh] md:h-[70vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 bg-asila-surface">
           {project.heroImage ? (
-            <img
+            <SmartImage
               src={project.heroImage}
               alt={project.name}
+              sizes="100vw"
               className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
               width="1920"
               height="1080"
             />
@@ -128,7 +132,7 @@ export default function ProjectDetail() {
                     className="flex-shrink-0 w-56 aspect-[4/3] bg-asila-surface border border-asila-blue/10 overflow-hidden"
                   >
                     {img ? (
-                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" width="224" height="168" />
+                      <SmartImage src={img} alt={`${project.name} ${i + 1}`} sizes="224px" className="w-full h-full object-cover" loading="lazy" width="224" height="168" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}
@@ -147,7 +151,7 @@ export default function ProjectDetail() {
                     }`}
                   >
                     {img ? (
-                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" width="400" height="300" />
+                      <SmartImage src={img} alt={`${project.name} ${i + 1}`} sizes="(min-width: 1024px) 400px, 50vw" className="w-full h-full object-cover" loading="lazy" width="400" height="300" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}

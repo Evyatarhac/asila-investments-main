@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Phone, Instagram } from "lucide-react";
 import ScrollFade from "../components/ScrollFade";
 import Breadcrumb from "../components/Breadcrumb";
+import SmartImage from "../components/SmartImage";
 
 export default function About() {
   const { t, lang } = useOutletContext();
@@ -67,9 +68,10 @@ export default function About() {
             <div className="relative">
               {/* Gold frame accent */}
               <div className={`absolute -top-3 ${isRTL ? "-left-3" : "-right-3"} w-full h-full border border-asila-gold/30 pointer-events-none`} />
-              <img
+              <SmartImage
                 src="/images/sunset/07.jpg"
                 alt="Asila Invest — Koh Phangan"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="w-full aspect-[3/4] object-cover"
               />
             </div>
@@ -105,9 +107,10 @@ export default function About() {
             <ScrollFade>
               <div className="relative">
                 <div className={`absolute -top-3 ${isRTL ? "-right-3" : "-left-3"} w-full h-full border border-asila-gold/25 pointer-events-none`} />
-                <img
+                <SmartImage
                   src="/images/eden.jpeg"
                   alt="Eden Asila"
+                  sizes="(min-width: 768px) 300px, 100vw"
                   className="w-full aspect-[3/4] object-cover object-top"
                 />
               </div>
