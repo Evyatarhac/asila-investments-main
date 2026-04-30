@@ -25,11 +25,11 @@ export default function SplashScreen({ onDone, videoReady }) {
       const t = setTimeout(() => onDone?.(), 500);
       return () => clearTimeout(t);
     }
-    // Safety: don't wait more than 5s total
+    // Safety: don't wait more than 3s total — release splash early, video loads behind
     const safety = setTimeout(() => {
       setPhase("out");
       setTimeout(() => onDone?.(), 500);
-    }, 3300); // 1700 already passed + 3300 = 5000ms max
+    }, 1300); // 1700 already passed + 1300 = 3000ms max
     return () => clearTimeout(safety);
   }, [minTimePassed, videoReady, onDone]);
 

@@ -36,9 +36,10 @@ export default function Home({ onVideoReady }) {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/images/sunset/07.jpg"
-            onCanPlayThrough={() => onVideoReady?.()}
+            fetchpriority="high"
+            onCanPlay={() => onVideoReady?.()}
           />
         </div>
         {/* Overlay */}
