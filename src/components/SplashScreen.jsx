@@ -76,7 +76,7 @@ export default function SplashScreen({ onDone, videoReady }) {
               className="font-body tracking-[0.35em] text-xs uppercase"
               style={{ color: BLUE_LIGHT }}
             >
-              invest
+              investments
             </span>
           </motion.div>
 

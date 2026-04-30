@@ -39,7 +39,7 @@ export default function Footer({ t }) {
 
           <div className="mt-8 pt-6 border-t border-asila-blue/20 w-full">
             <p className="text-asila-muted/60 text-xs font-body">
-              © {new Date().getFullYear()} Asila Invest. {t.footer.rights}
+              © {new Date().getFullYear()} Asila Investments. {t.footer.rights}
             </p>
           </div>
         </div>

@@ -24,7 +24,7 @@ export default function Logo({ size = "md", showText = true, showImage = true, c
             ASILA
           </span>
           <span className={`${s.sub} tracking-[0.2em] text-asila-muted font-body uppercase`}>
-            invest
+            investments
           </span>
         </div>
       )}
