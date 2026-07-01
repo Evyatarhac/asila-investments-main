@@ -8,12 +8,27 @@ import LeadForm from "../components/LeadForm";
 import ScrollFade from "../components/ScrollFade";
 import SmartImage from "../components/SmartImage";
 import projects from "../lib/projects";
+import useSEO from "../lib/useSEO";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
 
 export default function Home() {
   const { t, lang } = useOutletContext();
   const [filter, setFilter] = useState("all");
+
+  useSEO({
+    path: "/",
+    lang,
+    title:
+      lang === "he"
+        ? "יזמות ופיתוח נדל״ן יוקרתי בקופנגן, תאילנד"
+        : "Luxury Real Estate Development in Koh Phangan, Thailand",
+    description:
+      lang === "he"
+        ? "אסילה השקעות — חברת יזמות נדל״ן באי קופנגן, תאילנד. וילות ופרויקטי יוקרה למשקיעים: Paradise, Sunset, Coco ו-Arias."
+        : "ASILA Investments develops premium residential and hospitality projects on Koh Phangan, Thailand — Paradise, Sunset, Coco and Arias. Luxury villas for discerning investors.",
+    image: "/images/paradise/cover-lg.jpg",
+  });
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.status === filter);
 

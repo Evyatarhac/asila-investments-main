@@ -3,6 +3,7 @@ const translations = {
     nav: {
       projects: "Projects",
       about: "About",
+      blog: "Blog",
       contact: "Contact",
     },
     hero: {
@@ -77,6 +78,7 @@ const translations = {
     nav: {
       projects: "פרויקטים",
       about: "אודות",
+      blog: "בלוג",
       contact: "צור קשר",
     },
     hero: {

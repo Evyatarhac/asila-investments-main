@@ -31,3 +31,8 @@ dist-ssr
 .vite
 _original_assets/
 .claude/
+
+# Scratch media artifacts
+/video_build/
+/sunset-scroll-video.mp4
+/sunset-scroll-video.gif

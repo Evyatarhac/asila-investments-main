@@ -4,6 +4,7 @@ import { Phone, Instagram } from "lucide-react";
 import ScrollFade from "../components/ScrollFade";
 import Breadcrumb from "../components/Breadcrumb";
 import SmartImage from "../components/SmartImage";
+import useSEO from "../lib/useSEO";
 
 export default function About() {
   const { t, lang } = useOutletContext();
@@ -11,6 +12,20 @@ export default function About() {
 
   const paragraphs = t.about.companyParagraphs || [];
   const bioItems = t.about.founderBioItems || [];
+
+  useSEO({
+    path: "/about",
+    lang,
+    title:
+      lang === "he"
+        ? "אודות אסילה השקעות — היזם עדן אסילה"
+        : "About ASILA Investments — Founder Eden Asila",
+    description:
+      lang === "he"
+        ? "אסילה השקעות היא חברת יזמות נדל״ן באי קופנגן, תאילנד, בהובלת עדן אסילה — ליווי אישי, ניסיון מענף הבנייה וראייה יזמית ארוכת טווח."
+        : "ASILA Investments is a real estate development company on Koh Phangan, Thailand, led by founder Eden Asila — hands-on construction expertise and long-term entrepreneurial vision.",
+    image: "/images/eden-lg.jpg",
+  });
 
   return (
     <div className="bg-asila-page text-asila-body min-h-screen" dir={isRTL ? "rtl" : "ltr"}>
@@ -141,7 +156,7 @@ export default function About() {
                   054-5889256
                 </a>
                 <a
-                  href="https://instagram.com/"
+                  href="https://www.instagram.com/edenasilaa?igsh=MXUwMGdmeHk3c3Vhbw%3D%3D&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-asila-subtle hover:text-asila-navy text-sm font-body transition-colors group"
