@@ -6,6 +6,7 @@ import projects, { getStatusLabel } from "../lib/projects";
 import Breadcrumb from "../components/Breadcrumb";
 import Lightbox from "../components/Lightbox";
 import ScrollFade from "../components/ScrollFade";
+import useSEO, { SITE_URL } from "../lib/useSEO";
 
 const statusColors = {
   completed: "bg-asila-mid/30 text-asila-accent",
@@ -21,6 +22,52 @@ export default function ProjectDetail() {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = window.location.pathname.split("/").pop();
   const project = projects.find((p) => p.slug === slug);
+
+  const seoDesc = project
+    ? (project.shortDescription[lang] || project.shortDescription.en)
+    : undefined;
+
+  useSEO({
+    path: `/projects/${slug}`,
+    lang,
+    noindex: !project,
+    title: project
+      ? (lang === "he"
+          ? `${project.name} — נדל״ן יוקרה בקופנגן, תאילנד`
+          : `${project.name} — Luxury Real Estate in Koh Phangan, Thailand`)
+      : undefined,
+    description: seoDesc,
+    image: project?.heroImage,
+    type: "article",
+    jsonLd: project
+      ? {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Residence",
+              name: `ASILA — ${project.name}`,
+              description: project.fullDescription[lang] || project.fullDescription.en,
+              url: `${SITE_URL}/projects/${project.slug}`,
+              image: project.gallery.map((g) => `${SITE_URL}${g}`),
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Koh Phangan",
+                addressRegion: "Surat Thani",
+                addressCountry: "TH",
+              },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+                { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+                { "@type": "ListItem", position: 3, name: project.name, item: `${SITE_URL}/projects/${project.slug}` },
+              ],
+            },
+          ],
+        }
+      : undefined,
+  });
 
   if (!project) {
     return (

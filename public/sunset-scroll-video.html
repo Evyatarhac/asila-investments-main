@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunset — ASILA Investments</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #0A1628;
+    --navy: #0F2040;
+    --surface: #162B52;
+    --blue: #1B3A6B;
+    --mid: #2E5B9A;
+    --light: #4A7AB5;
+    --accent: #7BA7C8;
+    --text: #F0F4F8;
+    --muted: #9BB3C8;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A0;
+    --cream: #F8F6F1;
+    --page: #FFFFFF;
+  }
+
+  body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .phone-frame {
+    width: 375px;
+    height: 812px;
+    border-radius: 50px;
+    border: 8px solid #1a1a1a;
+    overflow: hidden;
+    position: relative;
+    background: var(--dark);
+    box-shadow:
+      0 0 0 2px #333,
+      0 20px 80px rgba(0,0,0,0.8),
+      inset 0 0 0 1px rgba(255,255,255,0.05);
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 30px;
+    background: #1a1a1a;
+    border-radius: 0 0 20px 20px;
+    z-index: 100;
+  }
+
+  .phone-notch::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+  }
+
+  .scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scroll-content {
+    animation: smoothScroll 20s ease-in-out infinite;
+    position: relative;
+  }
+
+  @keyframes smoothScroll {
+    0%   { transform: translateY(0); }
+    5%   { transform: translateY(0); }
+    15%  { transform: translateY(-812px); }
+    22%  { transform: translateY(-812px); }
+    32%  { transform: translateY(-1624px); }
+    39%  { transform: translateY(-1624px); }
+    49%  { transform: translateY(-2436px); }
+    56%  { transform: translateY(-2436px); }
+    66%  { transform: translateY(-3248px); }
+    73%  { transform: translateY(-3248px); }
+    83%  { transform: translateY(-4060px); }
+    90%  { transform: translateY(-4060px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* ============ SCREEN 1: HERO ============ */
+  .screen {
+    width: 375px;
+    height: 812px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-screen {
+    background: var(--dark);
+  }
+
+  .hero-screen .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-screen .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--dark) 0%, rgba(10,22,40,0.6) 40%, transparent 100%);
+  }
+
+  .hero-screen .hero-content {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 24px;
+    z-index: 10;
+  }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 0.15em;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .logo-sub {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--light);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding: 14px 40px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+  }
+
+  .scroll-indicator svg {
+    width: 100%;
+    height: 100%;
+    color: rgba(155, 179, 200, 0.5);
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ============ SCREEN 2: PROJECT HERO ============ */
+  .project-hero-screen {
+    background: var(--dark);
+  }
+
+  .project-hero-screen .hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+  }
+
+  .project-hero-screen .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--dark) 0%, rgba(10,22,40,0.4) 50%, transparent 100%);
+  }
+
+  .project-hero-screen .project-info {
+    position: absolute;
+    bottom: 42%;
+    left: 24px;
+    z-index: 10;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: rgba(74, 122, 181, 0.2);
+    color: var(--light);
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.04em;
+  }
+
+  .project-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .project-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    padding: 24px;
+    background: var(--dark);
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(27, 58, 107, 0.3);
+  }
+
+  .detail-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .detail-value {
+    font-size: 13px;
+    color: white;
+  }
+
+  /* ============ SCREEN 3: GALLERY ============ */
+  .gallery-screen {
+    background: var(--dark);
+    padding: 30px 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .section-line {
+    width: 50px;
+    height: 1px;
+    background: rgba(74, 122, 181, 0.4);
+    margin-bottom: 20px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .gallery-grid .full {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border: 1px solid rgba(27, 58, 107, 0.15);
+  }
+
+  .gallery-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .gallery-row img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border: 1px solid rgba(27, 58, 107, 0.15);
+  }
+
+  /* ============ SCREEN 4: DESCRIPTION ============ */
+  .description-screen {
+    background: var(--dark);
+    padding: 40px 24px;
+  }
+
+  .desc-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .desc-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(240, 244, 248, 0.8);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .desc-highlight {
+    border-left: 2px solid var(--gold);
+    padding-left: 16px;
+    margin: 28px 0;
+  }
+
+  .desc-highlight p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .feature-item {
+    background: var(--surface);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .feature-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .feature-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ============ SCREEN 5: ABOUT ============ */
+  .about-screen {
+    background: var(--page);
+    padding: 40px 24px;
+  }
+
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .about-line {
+    width: 50px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .about-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(26, 26, 26, 0.85);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .about-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .about-img-wrapper {
+    position: relative;
+    margin-top: 24px;
+  }
+
+  .about-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    z-index: 0;
+  }
+
+  .about-img-wrapper img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+
+  /* ============ SCREEN 6: CTA / CONTACT ============ */
+  .cta-screen {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .cta-logo {
+    margin-bottom: 40px;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .cta-line {
+    width: 50px;
+    height: 1px;
+    background: rgba(74, 122, 181, 0.4);
+    margin: 16px auto 28px;
+  }
+
+  .cta-input {
+    width: 100%;
+    background: rgba(22, 43, 82, 0.6);
+    border: 1px solid rgba(27, 58, 107, 0.5);
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 13px;
+    margin-bottom: 10px;
+    outline: none;
+  }
+
+  .cta-input::placeholder {
+    color: var(--muted);
+  }
+
+  .cta-button {
+    width: 100%;
+    background: var(--light);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    padding: 14px;
+    text-transform: uppercase;
+    border: none;
+    margin-top: 6px;
+    cursor: pointer;
+  }
+
+  .cta-footer {
+    margin-top: auto;
+    padding-top: 60px;
+  }
+
+  .cta-footer-text {
+    font-size: 10px;
+    color: rgba(155, 179, 200, 0.5);
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ AMBIENT ============ */
+  .ambient-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .glow-1 {
+    top: -200px;
+    left: -200px;
+    background: var(--mid);
+  }
+
+  .glow-2 {
+    bottom: -200px;
+    right: -200px;
+    background: var(--gold);
+    opacity: 0.08;
+  }
+
+  .brand-watermark {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.15);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-glow glow-1"></div>
+<div class="ambient-glow glow-2"></div>
+
+<div class="phone-frame">
+  <div class="phone-notch"></div>
+  <div class="scroll-container">
+    <div class="scroll-content">
+
+      <!-- SCREEN 1: LANDING HERO -->
+      <div class="screen hero-screen">
+        <img class="hero-img" src="/images/sunset/01.png" alt="Sunset Hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <div class="logo-text">ASILA</div>
+          <div class="logo-sub">investments</div>
+          <h1 class="hero-title">Sunset</h1>
+          <p class="hero-subtitle">Premium villas crafted to frame the perfect golden hour.</p>
+          <span class="hero-cta">Explore Project</span>
+        </div>
+        <div class="scroll-indicator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: PROJECT HERO + DETAILS -->
+      <div class="screen project-hero-screen">
+        <img class="hero-img" src="/images/sunset/02.png" alt="Sunset Villa">
+        <div class="overlay"></div>
+        <div class="project-info">
+          <div class="status-badge">In Progress</div>
+          <div class="project-name">Sunset</div>
+          <div class="project-meta">Koh Phangan, Thailand &bull; 2024</div>
+        </div>
+        <div class="project-details">
+          <div class="section-title" style="margin-bottom: 16px;">Project Details</div>
+          <div class="detail-row">
+            <span class="detail-label">Location</span>
+            <span class="detail-value">Koh Phangan, Thailand</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Status</span>
+            <span class="detail-value">In Progress</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Year</span>
+            <span class="detail-value">2024</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Type</span>
+            <span class="detail-value">Premium Villas</span>
+          </div>
+          <div class="detail-row" style="border-bottom: none;">
+            <span class="detail-label">Investment</span>
+            <span class="detail-value">Starting $350K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: GALLERY -->
+      <div class="screen gallery-screen">
+        <div class="section-title">Gallery</div>
+        <div class="section-line"></div>
+        <div class="gallery-grid">
+          <img class="full" src="/images/sunset/03.png" alt="Gallery 1">
+          <div class="gallery-row">
+            <img src="/images/sunset/04.png" alt="Gallery 2">
+            <img src="/images/sunset/05.png" alt="Gallery 3">
+          </div>
+          <div class="gallery-row">
+            <img src="/images/sunset/06.png" alt="Gallery 4">
+            <img src="/images/sunset/07.jpg" alt="Gallery 5">
+          </div>
+          <img class="full" src="/images/sunset/08.jpg" alt="Gallery 6">
+          <div class="gallery-row">
+            <img src="/images/sunset/09.png" alt="Gallery 7">
+            <img src="/images/sunset/01.png" alt="Gallery 8">
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: DESCRIPTION -->
+      <div class="screen description-screen">
+        <div class="section-title">About Sunset</div>
+        <div class="section-line"></div>
+        <div class="desc-label">Project Overview</div>
+        <p class="desc-text">
+          Sunset is a collection of premium villas, each oriented and designed to capture Thailand's legendary sunsets. The project pushes the boundaries of residential architecture.
+        </p>
+        <div class="desc-highlight">
+          <p>"Floor-to-ceiling glass, infinity-edge pools, and open-plan living spaces that blur the line between indoors and out."</p>
+        </div>
+        <p class="desc-text">
+          Delivered in 2024, Sunset established ASILA's reputation for creating properties that are as much about experience as they are about investment.
+        </p>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🏊</div>
+            <div class="feature-label">Infinity Pool</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🌅</div>
+            <div class="feature-label">Sunset View</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-label">Modern Design</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🌴</div>
+            <div class="feature-label">Tropical Living</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: ABOUT ASILA -->
+      <div class="screen about-screen">
+        <div class="about-title">About ASILA</div>
+        <div class="about-line"></div>
+        <p class="about-text">
+          ASILA Investments is a real estate development company focused on creating premium properties in Southeast Asia's most sought-after locations.
+        </p>
+        <p class="about-text">
+          Founded with a vision to bridge the gap between luxury and nature, every ASILA project is designed to deliver an unparalleled living experience while maintaining strong investment value.
+        </p>
+        <div class="about-img-wrapper">
+          <img src="/images/sunset/07.jpg" alt="ASILA Development">
+        </div>
+      </div>
+
+      <!-- SCREEN 6: CTA -->
+      <div class="screen cta-screen">
+        <div class="cta-logo">
+          <div class="logo-text">ASILA</div>
+          <div class="logo-sub">investments</div>
+        </div>
+        <div class="cta-title">Interested?</div>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 300;">
+          Get in touch to learn more about Sunset.
+        </p>
+        <div class="cta-line"></div>
+        <div style="width: 100%;">
+          <input class="cta-input" type="text" placeholder="Full Name" readonly>
+          <input class="cta-input" type="email" placeholder="Email Address" readonly>
+          <input class="cta-input" type="tel" placeholder="Phone Number" readonly>
+          <button class="cta-button">Send Inquiry</button>
+        </div>
+        <div class="cta-footer">
+          <div class="cta-footer-text">ASILA INVESTMENTS &copy; 2024</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="brand-watermark">ASILA INVESTMENTS</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+# ASILA Investments — robots.txt
+# Allow all reputable crawlers full access.
+
+User-agent: *
+Allow: /
+
+# Block known low-value / aggressive scrapers (optional, keeps crawl budget clean)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://asila.co.il/sitemap.xml

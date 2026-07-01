@@ -1,0 +1,26 @@
+{
+  "name": "ASILA Investments — Luxury Real Estate, Koh Phangan",
+  "short_name": "ASILA",
+  "description": "Premium real estate development on Koh Phangan, Thailand. Residential and hospitality investment projects by ASILA Investments.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1620",
+  "theme_color": "#0b1620",
+  "lang": "en",
+  "dir": "auto",
+  "icons": [
+    {
+      "src": "/logo-mark.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

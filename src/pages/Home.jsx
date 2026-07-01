@@ -7,12 +7,27 @@ import ProjectCard from "../components/ProjectCard";
 import LeadForm from "../components/LeadForm";
 import ScrollFade from "../components/ScrollFade";
 import projects from "../lib/projects";
+import useSEO from "../lib/useSEO";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
 
-export default function Home({ onVideoReady }) {
+export default function Home({ onVideoReady, hideHero = false }) {
   const { t, lang } = useOutletContext();
   const [filter, setFilter] = useState("all");
+
+  useSEO({
+    path: "/",
+    lang,
+    title:
+      lang === "he"
+        ? "יזמות ופיתוח נדל״ן יוקרתי בקופנגן, תאילנד"
+        : "Luxury Real Estate Development in Koh Phangan, Thailand",
+    description:
+      lang === "he"
+        ? "אסילה השקעות — חברת יזמות נדל״ן באי קופנגן, תאילנד. וילות ופרויקטי יוקרה למשקיעים: Paradise, Sunset, Coco ו-Arias."
+        : "ASILA Investments develops premium residential and hospitality projects on Koh Phangan, Thailand — Paradise, Sunset, Coco and Arias. Luxury villas for discerning investors.",
+    image: "/images/paradise/cover.webp",
+  });
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.status === filter);
 
@@ -26,21 +41,23 @@ export default function Home({ onVideoReady }) {
   return (
     <div>
       {/* Hero */}
+      {!hideHero && (
       <section className="relative h-[100svh] flex items-end justify-center overflow-hidden">
         {/* Hero Video */}
         <div className="absolute inset-0 bg-asila-dark">
           <video
             className="absolute inset-0 w-full h-full object-cover"
-            src="/hero.mov"
+            poster="/hero-poster.jpg"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            poster="/images/sunset/07.jpg"
             fetchpriority="high"
             onCanPlay={() => onVideoReady?.()}
-          />
+          >
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
         </div>
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-asila-dark via-asila-dark/60 to-transparent" />
@@ -78,6 +95,7 @@ export default function Home({ onVideoReady }) {
           <ChevronDown className="w-5 h-5 text-asila-muted/50" />
         </motion.div>
       </section>
+      )}
 
       {/* Projects */}
       <section id="projects" className="py-16 md:py-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -141,11 +159,13 @@ export default function Home({ onVideoReady }) {
 
             <ScrollFade delay={0.2}>
               <img
-                src="/images/sunset/07.jpg"
-                alt="Asila Invest — Koh Phangan"
+                src="/images/sunset/07.webp"
+                alt="ASILA Investments luxury development on Koh Phangan, Thailand"
                 className="w-full aspect-[3/4] object-cover"
                 loading="lazy"
                 decoding="async"
+                width="600"
+                height="800"
               />
             </ScrollFade>
           </div>
@@ -176,10 +196,12 @@ export default function Home({ onVideoReady }) {
               <ScrollFade>
                 <img
                   src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/888bc014c_WhatsAppImage2026-04-16at132508.jpg"
-                  alt="Eden Asila"
+                  alt="Eden Asila — Founder & Developer, ASILA Investments"
                   className="w-full aspect-[3/4] object-cover object-top"
                   loading="lazy"
                   decoding="async"
+                  width="600"
+                  height="800"
                 />
               </ScrollFade>
 

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sunset Stage Export</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --dark:#0A1628; --navy:#0F2040; --surface:#162B52; --blue:#1B3A6B;
+    --mid:#2E5B9A; --light:#4A7AB5; --accent:#7BA7C8; --text:#F0F4F8;
+    --muted:#9BB3C8; --gold:#C9A84C; --gold-light:#E8D5A0; --page:#FFFFFF;
+  }
+  body { background:#111; font-family:'Inter',sans-serif; color:#fff; padding:12px; }
+  #status { font-size:14px; color:#9BB3C8; margin-bottom:10px; }
+  #stage { width:375px; }
+  .screen { width:375px; height:812px; position:relative; overflow:hidden; }
+  .bg { position:absolute; background-size:cover; background-position:center; }
+
+  .hero-screen { background:var(--dark); }
+  .hero-screen .bg-full { inset:0; }
+  .hero-screen .overlay { position:absolute; inset:0; background:linear-gradient(to top,var(--dark) 0%,rgba(10,22,40,.6) 40%,transparent 100%); }
+  .hero-content { position:absolute; bottom:90px; left:0; right:0; text-align:center; padding:0 24px; }
+  .logo-text { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; letter-spacing:.15em; color:#fff; }
+  .logo-sub { font-size:9px; letter-spacing:.25em; color:var(--muted); text-transform:uppercase; margin-bottom:30px; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; color:#fff; letter-spacing:.05em; margin-bottom:10px; line-height:1; }
+  .hero-subtitle { font-size:13px; color:var(--muted); font-weight:300; margin-bottom:28px; }
+  .hero-cta { display:inline-block; background:var(--light); color:#fff; font-size:12px; letter-spacing:.1em; padding:14px 40px; text-transform:uppercase; }
+
+  .project-hero-screen { background:var(--dark); }
+  .project-hero-screen .bg-top { top:0; left:0; width:100%; height:58%; }
+  .project-hero-screen .overlay { position:absolute; top:0; left:0; width:100%; height:58%; background:linear-gradient(to top,var(--dark) 0%,rgba(10,22,40,.35) 55%,transparent 100%); }
+  .project-info { position:absolute; top:40%; left:24px; }
+  .status-badge { display:inline-block; font-size:9px; letter-spacing:.15em; text-transform:uppercase; padding:4px 10px; background:rgba(74,122,181,.25); color:var(--light); margin-bottom:10px; }
+  .project-name { font-family:'Cormorant Garamond',serif; font-size:46px; font-weight:300; color:#fff; letter-spacing:.04em; line-height:1; }
+  .project-meta { font-size:12px; color:var(--muted); margin-top:8px; }
+  .project-details { position:absolute; bottom:0; left:0; right:0; height:42%; padding:22px 24px; background:var(--dark); }
+  .detail-row { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid rgba(27,58,107,.3); }
+  .detail-label { font-size:13px; color:var(--muted); }
+  .detail-value { font-size:13px; color:#fff; }
+
+  .gallery-screen { background:var(--dark); padding:30px 16px; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:#fff; letter-spacing:.04em; margin-bottom:6px; }
+  .section-line { width:50px; height:1px; background:rgba(74,122,181,.4); margin-bottom:18px; }
+  .grid { display:grid; gap:8px; }
+  .grid .full { width:100%; height:170px; }
+  .grow { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .grow .cell { width:100%; height:120px; }
+
+  .description-screen { background:var(--dark); padding:38px 24px; }
+  .desc-label { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .desc-text { font-size:13px; line-height:1.8; color:rgba(240,244,248,.8); font-weight:300; margin-bottom:18px; }
+  .desc-highlight { border-left:2px solid var(--gold); padding-left:16px; margin:26px 0; }
+  .desc-highlight p { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; color:var(--gold-light); line-height:1.5; font-style:italic; }
+  .feature-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+  .feature-item { background:var(--surface); padding:18px 12px; text-align:center; }
+  .feature-dot { width:8px; height:8px; background:var(--gold); transform:rotate(45deg); margin:0 auto 10px; }
+  .feature-label { font-size:10px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+
+  .about-screen { background:var(--page); padding:40px 24px; }
+  .about-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:500; color:var(--navy); margin-bottom:8px; }
+  .about-line { width:50px; height:2px; background:var(--gold); margin-bottom:20px; }
+  .about-text { font-size:13px; line-height:1.8; color:rgba(26,26,26,.85); font-weight:300; margin-bottom:16px; }
+  .about-img { width:100%; height:330px; margin-top:24px; }
+
+  .cta-screen { background:var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 24px; }
+  .cta-logo { margin-bottom:36px; }
+  .cta-title { font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:300; color:#fff; letter-spacing:.04em; margin-bottom:8px; }
+  .cta-sub { font-size:13px; color:var(--muted); font-weight:300; }
+  .cta-line { width:50px; height:1px; background:rgba(74,122,181,.4); margin:18px auto 26px; }
+  .cta-input { width:100%; background:rgba(22,43,82,.6); border:1px solid rgba(27,58,107,.5); padding:14px 16px; color:var(--muted); font-size:13px; margin-bottom:10px; text-align:left; }
+  .cta-button { width:100%; background:var(--light); color:#fff; font-size:12px; letter-spacing:.15em; padding:15px; text-transform:uppercase; margin-top:6px; }
+  .cta-footer { margin-top:50px; font-size:10px; color:rgba(155,179,200,.5); letter-spacing:.1em; }
+</style>
+</head>
+<body>
+<div id="status">Preparing…</div>
+
+<div id="stage">
+  <div class="screen hero-screen">
+    <div class="bg bg-full" data-src="/images/sunset/01.png"></div>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <div class="logo-text">ASILA</div>
+      <div class="logo-sub">investments</div>
+      <div class="hero-title">Sunset</div>
+      <div class="hero-subtitle">Premium villas crafted to frame the perfect golden hour.</div>
+      <span class="hero-cta">Explore Project</span>
+    </div>
+  </div>
+
+  <div class="screen project-hero-screen">
+    <div class="bg bg-top" data-src="/images/sunset/02.png"></div>
+    <div class="overlay"></div>
+    <div class="project-info">
+      <div class="status-badge">In Progress</div>
+      <div class="project-name">Sunset</div>
+      <div class="project-meta">Koh Phangan, Thailand &bull; 2024</div>
+    </div>
+    <div class="project-details">
+      <div class="section-title" style="margin-bottom:14px;">Project Details</div>
+      <div class="detail-row"><span class="detail-label">Location</span><span class="detail-value">Koh Phangan, Thailand</span></div>
+      <div class="detail-row"><span class="detail-label">Status</span><span class="detail-value">In Progress</span></div>
+      <div class="detail-row"><span class="detail-label">Year</span><span class="detail-value">2024</span></div>
+      <div class="detail-row"><span class="detail-label">Type</span><span class="detail-value">Premium Villas</span></div>
+      <div class="detail-row" style="border-bottom:none;"><span class="detail-label">Investment</span><span class="detail-value">Starting $350K</span></div>
+    </div>
+  </div>
+
+  <div class="screen gallery-screen">
+    <div class="section-title">Gallery</div>
+    <div class="section-line"></div>
+    <div class="grid">
+      <div class="bg full" data-src="/images/sunset/03.png"></div>
+      <div class="grow">
+        <div class="bg cell" data-src="/images/sunset/04.png"></div>
+        <div class="bg cell" data-src="/images/sunset/05.png"></div>
+      </div>
+      <div class="grow">
+        <div class="bg cell" data-src="/images/sunset/06.png"></div>
+        <div class="bg cell" data-src="/images/sunset/07.jpg"></div>
+      </div>
+      <div class="bg full" data-src="/images/sunset/08.jpg"></div>
+      <div class="grow">
+        <div class="bg cell" data-src="/images/sunset/09.png"></div>
+        <div class="bg cell" data-src="/images/sunset/01.png"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen description-screen">
+    <div class="section-title">About Sunset</div>
+    <div class="section-line"></div>
+    <div class="desc-label">Project Overview</div>
+    <div class="desc-text">Sunset is a collection of premium villas, each oriented and designed to capture Thailand's legendary sunsets. The project pushes the boundaries of residential architecture.</div>
+    <div class="desc-highlight"><p>"Floor-to-ceiling glass, infinity-edge pools, and open-plan living spaces that blur the line between indoors and out."</p></div>
+    <div class="desc-text">Delivered in 2024, Sunset established ASILA's reputation for creating properties that are as much about experience as investment.</div>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-label">Infinity Pool</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-label">Sunset View</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-label">Modern Design</div></div>
+      <div class="feature-item"><div class="feature-dot"></div><div class="feature-label">Tropical Living</div></div>
+    </div>
+  </div>
+
+  <div class="screen about-screen">
+    <div class="about-title">About ASILA</div>
+    <div class="about-line"></div>
+    <div class="about-text">ASILA Investments is a real estate development company focused on creating premium properties in Southeast Asia's most sought-after locations.</div>
+    <div class="about-text">Founded with a vision to bridge the gap between luxury and nature, every ASILA project is designed to deliver an unparalleled living experience while maintaining strong investment value.</div>
+    <div class="bg about-img" data-src="/images/sunset/07.jpg"></div>
+  </div>
+
+  <div class="screen cta-screen">
+    <div class="cta-logo">
+      <div class="logo-text">ASILA</div>
+      <div class="logo-sub">investments</div>
+    </div>
+    <div class="cta-title">Interested?</div>
+    <div class="cta-sub">Get in touch to learn more about Sunset.</div>
+    <div class="cta-line"></div>
+    <div style="width:100%;">
+      <div class="cta-input">Full Name</div>
+      <div class="cta-input">Email Address</div>
+      <div class="cta-input">Phone Number</div>
+      <div class="cta-button">Send Inquiry</div>
+    </div>
+    <div class="cta-footer">ASILA INVESTMENTS &copy; 2024</div>
+  </div>
+</div>
+
+<script>
+const SCREEN_W=375, SCREEN_H=812, SCREENS=6, SCALE=3;
+const status=document.getElementById('status');
+function preload(){
+  const nodes=[...document.querySelectorAll('.bg')];
+  return Promise.all(nodes.map(n=>new Promise(res=>{
+    const src=n.getAttribute('data-src');
+    const img=new Image();
+    img.onload=()=>{ n.style.backgroundImage=`url('${src}')`; res(); };
+    img.onerror=()=>{ n.style.backgroundColor='#162B52'; res(); };
+    img.src=src;
+  })));
+}
+async function main(){
+  await preload();
+  if(document.fonts && document.fonts.ready) await document.fonts.ready;
+  status.textContent='Rendering…';
+  await new Promise(r=>setTimeout(r,400));
+  const stage=document.getElementById('stage');
+  const canvas=await html2canvas(stage,{
+    scale:SCALE, useCORS:true, backgroundColor:'#0A1628',
+    width:SCREEN_W, height:SCREEN_H*SCREENS, windowWidth:SCREEN_W, windowHeight:SCREEN_H*SCREENS
+  });
+  canvas.toBlob(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download='sunset-stage.png';
+    document.body.appendChild(a); a.click();
+    window.__DONE__=true;
+    window.__DIMS__={w:canvas.width,h:canvas.height};
+    status.textContent='✓ Exported sunset-stage.png ('+canvas.width+'x'+canvas.height+')';
+  },'image/png');
+}
+window.addEventListener('load',()=>setTimeout(main,300));
+</script>
+</body>
+</html>

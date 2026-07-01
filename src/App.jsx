@@ -8,10 +8,14 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import HomeExperience from './pages/HomeExperience';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import SunsetExperience from './pages/SunsetExperience';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import SplashScreen from './components/SplashScreen';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -39,8 +43,11 @@ const AuthenticatedApp = ({ splashDone, onVideoReady }) => {
       <Route element={<Layout />}>
         <Route path="/" element={<Home onVideoReady={onVideoReady} />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/sunset" element={<SunsetExperience />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>

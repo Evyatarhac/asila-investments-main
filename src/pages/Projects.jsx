@@ -4,6 +4,7 @@ import ProjectCard from "../components/ProjectCard";
 import Breadcrumb from "../components/Breadcrumb";
 import ScrollFade from "../components/ScrollFade";
 import projects from "../lib/projects";
+import useSEO, { SITE_URL } from "../lib/useSEO";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
 
@@ -12,6 +13,36 @@ export default function Projects() {
   const [filter, setFilter] = useState("all");
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.status === filter);
+
+  useSEO({
+    path: "/projects",
+    lang,
+    title:
+      lang === "he"
+        ? "הפרויקטים שלנו — נדל״ן יוקרה בקופנגן | ASILA"
+        : "Our Projects — Luxury Developments in Koh Phangan",
+    description:
+      lang === "he"
+        ? "כל פרויקטי הנדל״ן של אסילה השקעות באי קופנגן, תאילנד — הושלמו, בביצוע ובקרוב. Paradise, Sunset, Coco ו-Arias."
+        : "Explore ASILA Investments' real estate developments on Koh Phangan, Thailand — completed, in progress and upcoming luxury villa projects.",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: lang === "he" ? "הפרויקטים של ASILA Investments" : "ASILA Investments Projects",
+      url: `${SITE_URL}/projects`,
+      hasPart: projects.map((p) => ({
+        "@type": "Residence",
+        name: p.name,
+        url: `${SITE_URL}/projects/${p.slug}`,
+        image: `${SITE_URL}${p.heroImage}`,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Koh Phangan",
+          addressCountry: "TH",
+        },
+      })),
+    },
+  });
 
   const filterLabels = {
     all: t.projects.all,

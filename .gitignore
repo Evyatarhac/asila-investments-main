@@ -29,3 +29,11 @@ dist-ssr
 
 .env
 .vite
+
+# Claude Code local session data (not part of the app)
+.claude/
+
+# Scratch media artifacts (not part of the deployed app)
+/video_build/
+/sunset-scroll-video.mp4
+/sunset-scroll-video.gif

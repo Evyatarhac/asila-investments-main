@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://asila.co.il/</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/sunset/07.webp</image:loc>
+      <image:title>ASILA Investments — Luxury real estate development, Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/projects</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/projects/paradise</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/paradise/cover.webp</image:loc>
+      <image:title>Paradise — Luxury residential development, Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/projects/sunset</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/sunset/01.webp</image:loc>
+      <image:title>Sunset — Premium sunset-view villas, Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/projects/coco</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/coco/01.webp</image:loc>
+      <image:title>Coco — Boutique beachfront development, Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/projects/arias</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/arias/01.webp</image:loc>
+      <image:title>Arias — Flagship mixed-use luxury development, Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/about</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog/koh-phangan-real-estate-investment-guide</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://asila.co.il/images/paradise/drone.webp</image:loc>
+      <image:title>The Complete Guide to Real Estate Investment in Koh Phangan</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog/foreign-property-ownership-thailand-freehold-leasehold</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog/koh-phangan-vs-phuket-vs-koh-samui-where-to-invest</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog/koh-phangan-property-roi-rental-yields</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/blog/how-to-buy-property-koh-phangan-step-by-step</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://asila.co.il/contact</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

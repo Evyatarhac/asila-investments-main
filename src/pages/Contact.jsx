@@ -3,9 +3,23 @@ import LeadForm from "../components/LeadForm";
 import ScrollFade from "../components/ScrollFade";
 import Breadcrumb from "../components/Breadcrumb";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
+import useSEO from "../lib/useSEO";
 
 export default function Contact() {
   const { t, lang } = useOutletContext();
+
+  useSEO({
+    path: "/contact",
+    lang,
+    title:
+      lang === "he"
+        ? "צור קשר — אסילה השקעות נדל״ן בקופנגן"
+        : "Contact ASILA Investments — Koh Phangan Real Estate",
+    description:
+      lang === "he"
+        ? "מעוניינים בהשקעת נדל״ן בקופנגן, תאילנד? צרו קשר עם אסילה השקעות בטלפון 054-5889256 או office@asila.co.il."
+        : "Interested in real estate investment on Koh Phangan, Thailand? Contact ASILA Investments at +972-54-5889256 or office@asila.co.il.",
+  });
 
   return (
     <div className="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -48,7 +62,7 @@ export default function Contact() {
                   <Mail className="w-4 h-4 text-asila-light flex-shrink-0" />
                   office@asila.co.il
                 </a>
-                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-asila-muted hover:text-white text-sm transition-colors">
+                <a href="https://www.instagram.com/edenasilaa?igsh=MXUwMGdmeHk3c3Vhbw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-asila-muted hover:text-white text-sm transition-colors">
                   <Instagram className="w-4 h-4 text-asila-light flex-shrink-0" />
                   @asila.invest
                 </a>

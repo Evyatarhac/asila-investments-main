@@ -3,10 +3,25 @@ import { motion } from "framer-motion";
 import { Phone, Instagram } from "lucide-react";
 import ScrollFade from "../components/ScrollFade";
 import Breadcrumb from "../components/Breadcrumb";
+import useSEO from "../lib/useSEO";
 
 export default function About() {
   const { t, lang } = useOutletContext();
   const isRTL = lang === "he";
+
+  useSEO({
+    path: "/about",
+    lang,
+    title:
+      lang === "he"
+        ? "אודות אסילה השקעות — היזם עדן אסילה"
+        : "About ASILA Investments — Founder Eden Asila",
+    description:
+      lang === "he"
+        ? "אסילה השקעות היא חברת יזמות נדל״ן באי קופנגן, תאילנד, בהובלת עדן אסילה — ליווי אישי, ניסיון מענף הבנייה וראייה יזמית ארוכת טווח."
+        : "ASILA Investments is a real estate development company on Koh Phangan, Thailand, led by founder Eden Asila — hands-on construction expertise and long-term entrepreneurial vision.",
+    image: "/images/eden.jpeg",
+  });
 
   const paragraphs = t.about.companyParagraphs || [];
   const bioItems = t.about.founderBioItems || [];
@@ -65,11 +80,13 @@ export default function About() {
           {/* Image */}
           <ScrollFade delay={0.2}>
             <img
-              src="/images/sunset/07.jpg"
-              alt="Asila Invest — Koh Phangan"
+              src="/images/sunset/07.webp"
+              alt="ASILA Investments development on Koh Phangan, Thailand"
               className="w-full aspect-[3/4] object-cover"
               loading="lazy"
               decoding="async"
+              width="600"
+              height="800"
             />
           </ScrollFade>
         </div>
@@ -103,10 +120,12 @@ export default function About() {
             <ScrollFade>
               <img
                 src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/888bc014c_WhatsAppImage2026-04-16at132508.jpg"
-                alt="Eden Asila"
+                alt="Eden Asila — Founder & Developer, ASILA Investments"
                 className="w-full aspect-[3/4] object-cover object-top"
                 loading="lazy"
                 decoding="async"
+                width="600"
+                height="800"
               />
             </ScrollFade>
 
