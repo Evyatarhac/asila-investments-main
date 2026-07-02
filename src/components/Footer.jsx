@@ -6,7 +6,6 @@ export default function Footer({ t }) {
     <footer className="bg-asila-dark border-t border-asila-light/20">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
         <div className="flex flex-col items-center text-center gap-6">
-          <Logo size="md" />
           <p className="text-asila-muted text-sm font-body">
             {t.footer.tagline}
           </p>
@@ -39,7 +38,7 @@ export default function Footer({ t }) {
 
           <div className="mt-8 pt-6 border-t border-asila-blue/20 w-full">
             <p className="text-asila-muted/60 text-xs font-body">
-              © {new Date().getFullYear()} ASILA investments. {t.footer.rights}
+              © {new Date().getFullYear()} Asila Investments. {t.footer.rights}
             </p>
           </div>
         </div>

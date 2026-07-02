@@ -6,18 +6,32 @@ const BLUE_DARK  = "#1B3A6B";
 const BLUE_LIGHT = "#4A7AB5";
 
 /* ─── Main component ─── */
-export default function SplashScreen({ onDone }) {
+export default function SplashScreen({ onDone, videoReady }) {
   const [phase, setPhase] = useState("in"); // "in" | "hold" | "out"
+  const [minTimePassed, setMinTimePassed] = useState(false);
 
+  // Minimum display time for the splash animation
   useEffect(() => {
-    // hold after enter animation (~600ms)
     const t1 = setTimeout(() => setPhase("hold"), 600);
-    // start exit at 1700ms → fully gone by 2200ms
-    const t2 = setTimeout(() => setPhase("out"), 1700);
-    // notify parent
-    const t3 = setTimeout(() => onDone?.(), 2200);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [onDone]);
+    const t2 = setTimeout(() => setMinTimePassed(true), 1700);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  // Start exit once both min time passed AND video is ready (or 5s max)
+  useEffect(() => {
+    if (!minTimePassed) return;
+    if (videoReady) {
+      setPhase("out");
+      const t = setTimeout(() => onDone?.(), 500);
+      return () => clearTimeout(t);
+    }
+    // Safety: don't wait more than 3s total — release splash early, video loads behind
+    const safety = setTimeout(() => {
+      setPhase("out");
+      setTimeout(() => onDone?.(), 500);
+    }, 1300); // 1700 already passed + 1300 = 3000ms max
+    return () => clearTimeout(safety);
+  }, [minTimePassed, videoReady, onDone]);
 
   return (
     <AnimatePresence>

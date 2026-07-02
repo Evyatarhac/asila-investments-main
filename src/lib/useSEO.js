@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://asila.co.il";
-const DEFAULT_IMAGE = `${SITE_URL}/images/paradise/cover-lg.jpg`;
+const DEFAULT_IMAGE = `${SITE_URL}/images/paradise/cover.webp`;
 const SITE_NAME = "ASILA Investments";
 
 /**

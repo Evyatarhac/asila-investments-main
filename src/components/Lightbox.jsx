@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import SmartImage from "./SmartImage";
 
 export default function Lightbox({ images, initialIndex = 0, onClose }) {
   const [index, setIndex] = useState(initialIndex);
@@ -68,11 +67,9 @@ export default function Lightbox({ images, initialIndex = 0, onClose }) {
 
       <div className="max-w-5xl max-h-[85vh] w-full px-4" onClick={(e) => e.stopPropagation()}>
         {images[index] ? (
-          <SmartImage
+          <img
             src={images[index]}
             alt={`Gallery image ${index + 1}`}
-            sizes="(min-width: 1024px) 80vw, 100vw"
-            loading="eager"
             className="w-full h-full object-contain max-h-[80vh]"
           />
         ) : (

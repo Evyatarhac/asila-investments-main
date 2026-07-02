@@ -11,7 +11,7 @@ export default function Logo({ size = "md", showText = true, showImage = true, c
     <div className={`flex items-center gap-2 md:gap-3 ${className}`}>
       {showImage && (
         <img
-          src="/logo-transparent.png"
+          src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/ddf288bb1_asilalogoblue.png"
           alt="ASILA logo"
           className={`${s.image} w-auto object-contain`}
           width="144"

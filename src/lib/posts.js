@@ -9,7 +9,7 @@ const posts = [
     category: { en: "Investment Guide", he: "מדריך השקעה" },
     date: "2026-06-15",
     readingTime: 8,
-    coverImage: "/images/paradise/drone-lg.jpg",
+    coverImage: "/images/paradise/drone.webp",
     title: {
       en: "The Complete Guide to Real Estate Investment in Koh Phangan (2026)",
       he: "המדריך המלא להשקעת נדל״ן בקופנגן (2026)",
@@ -82,7 +82,7 @@ At ASILA we develop premium residential projects on Koh Phangan with full involv
     category: { en: "Legal & Ownership", he: "משפט ובעלות" },
     date: "2026-06-22",
     readingTime: 7,
-    coverImage: "/images/sunset/07-lg.jpg",
+    coverImage: "/images/sunset/07.webp",
     title: {
       en: "Foreign Property Ownership in Thailand: Freehold vs Leasehold Explained",
       he: "בעלות זרים על נדל״ן בתאילנד: Freehold מול Leasehold",
@@ -153,7 +153,7 @@ At ASILA, ownership structure and legal clarity are part of how we guide every i
     category: { en: "Market Comparison", he: "השוואת שווקים" },
     date: "2026-06-28",
     readingTime: 6,
-    coverImage: "/images/coco/03-lg.jpg",
+    coverImage: "/images/coco/03.webp",
     title: {
       en: "Koh Phangan vs Phuket vs Koh Samui — Where Should You Invest?",
       he: "קופנגן מול פוקט מול קוסמוי — איפה כדאי להשקיע?",
@@ -224,7 +224,7 @@ ASILA מתמקדת באופן בלעדי בקופנגן, שם אנו מאמינ�
     category: { en: "Investment Guide", he: "מדריך השקעה" },
     date: "2026-06-30",
     readingTime: 6,
-    coverImage: "/images/coco/01-lg.jpg",
+    coverImage: "/images/coco/01.webp",
     title: {
       en: "ROI & Rental Yields: What to Expect from Koh Phangan Property",
       he: "תשואה ו-ROI: מה לצפות מנכס בקופנגן",
@@ -295,7 +295,7 @@ The honest way to evaluate a project is to look at real delivery track record an
     category: { en: "Buyer's Guide", he: "מדריך רוכש" },
     date: "2026-07-01",
     readingTime: 7,
-    coverImage: "/images/sunset/03-lg.jpg",
+    coverImage: "/images/sunset/03.webp",
     title: {
       en: "How to Buy Property in Koh Phangan: A Step-by-Step Guide",
       he: "איך לרכוש נכס בקופנגן: מדריך שלב-אחר-שלב",

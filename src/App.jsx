@@ -1,4 +1,4 @@
-import { useState, useCallback, lazy, Suspense } from 'react';
+import { useState, useCallback } from 'react';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -8,26 +8,23 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import HomeExperience from './pages/HomeExperience';
+import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
+import SunsetExperience from './pages/SunsetExperience';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import SplashScreen from './components/SplashScreen';
 import ScrollToTop from './components/ScrollToTop';
 
-const Projects = lazy(() => import('./pages/Projects'));
-const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
-
-const AuthenticatedApp = () => {
+const AuthenticatedApp = ({ splashDone, onVideoReady }) => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-asila-dark">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
+  // While splash is showing OR auth is loading, show nothing (splash covers the screen)
+  if (!splashDone || isLoadingPublicSettings || isLoadingAuth) {
+    return null;
   }
 
   // Handle authentication errors
@@ -35,7 +32,6 @@ const AuthenticatedApp = () => {
     if (authError.type === 'user_not_registered') {
       return <UserNotRegisteredError />;
     } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
       navigateToLogin();
       return null;
     }
@@ -43,37 +39,38 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home onVideoReady={onVideoReady} />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/sunset" element={<SunsetExperience />} />
+        <Route path="/projects/:slug" element={<ProjectDetail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
   );
 };
 
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const handleSplashDone = useCallback(() => setSplashDone(true), []);
+  const handleVideoReady = useCallback(() => setVideoReady(true), []);
 
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        {/* Splash renders on top; app loads silently behind it */}
-        {!splashDone && <SplashScreen onDone={handleSplashDone} />}
+        {/* Splash renders on top while app loads behind it */}
+        {!splashDone && <SplashScreen onDone={handleSplashDone} videoReady={videoReady} />}
 
         <Router>
           <ScrollToTop />
-          <AuthenticatedApp />
+          <AuthenticatedApp splashDone={splashDone} onVideoReady={handleVideoReady} />
         </Router>
         <Toaster />
       </QueryClientProvider>

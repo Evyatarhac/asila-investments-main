@@ -5,6 +5,11 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   logLevel: 'error', // Suppress warnings, only show errors
+  build: {
+    // Transpile down so the static prerender step (react-snap's bundled
+    // Chromium) can execute the bundle, and for broader browser support.
+    target: 'es2019',
+  },
   plugins: [
     base44({
       // Support for legacy code that imports the base44 SDK with @/integrations, @/entities, etc.
@@ -16,16 +21,5 @@ export default defineConfig({
       visualEditAgent: true
     }),
     react(),
-  ],
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'motion': ['framer-motion'],
-          'query': ['@tanstack/react-query'],
-        },
-      },
-    },
-  },
+  ]
 });

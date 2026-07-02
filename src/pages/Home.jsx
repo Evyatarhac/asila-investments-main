@@ -6,13 +6,12 @@ import Logo from "../components/Logo";
 import ProjectCard from "../components/ProjectCard";
 import LeadForm from "../components/LeadForm";
 import ScrollFade from "../components/ScrollFade";
-import SmartImage from "../components/SmartImage";
 import projects from "../lib/projects";
 import useSEO from "../lib/useSEO";
 
 const filters = ["all", "completed", "in-progress", "upcoming"];
 
-export default function Home() {
+export default function Home({ onVideoReady, hideHero = false }) {
   const { t, lang } = useOutletContext();
   const [filter, setFilter] = useState("all");
 
@@ -27,7 +26,7 @@ export default function Home() {
       lang === "he"
         ? "אסילה השקעות — חברת יזמות נדל״ן באי קופנגן, תאילנד. וילות ופרויקטי יוקרה למשקיעים: Paradise, Sunset, Coco ו-Arias."
         : "ASILA Investments develops premium residential and hospitality projects on Koh Phangan, Thailand — Paradise, Sunset, Coco and Arias. Luxury villas for discerning investors.",
-    image: "/images/paradise/cover-lg.jpg",
+    image: "/images/paradise/cover.webp",
   });
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.status === filter);
@@ -42,19 +41,23 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
+      {!hideHero && (
       <section className="relative h-[100svh] flex items-end justify-center overflow-hidden">
         {/* Hero Video */}
         <div className="absolute inset-0 bg-asila-dark">
           <video
             className="absolute inset-0 w-full h-full object-cover"
-            src="/hero.mp4"
             poster="/hero-poster.jpg"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-          />
+            fetchpriority="high"
+            onCanPlay={() => onVideoReady?.()}
+          >
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
         </div>
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-asila-dark via-asila-dark/60 to-transparent" />
@@ -92,6 +95,7 @@ export default function Home() {
           <ChevronDown className="w-5 h-5 text-asila-muted/50" />
         </motion.div>
       </section>
+      )}
 
       {/* Projects */}
       <section id="projects" className="py-16 md:py-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -129,21 +133,21 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section className="bg-asila-page text-asila-body" dir={lang === "he" ? "rtl" : "ltr"}>
+      <section className="bg-asila-navy/50" dir={lang === "he" ? "rtl" : "ltr"}>
         {/* Company */}
         <div className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start">
             <ScrollFade>
-              <h2 className="font-heading text-3xl md:text-4xl font-medium text-asila-navy mb-6">
+              <h2 className="font-heading text-3xl md:text-4xl font-medium text-white mb-6">
                 {t.about.companyTitle}
               </h2>
-              <div className="w-16 h-[2px] bg-asila-gold mb-8" />
+              <div className="w-16 h-[2px] bg-asila-gold/60 mb-8" />
               <div className="space-y-5">
                 {(t.about.companyParagraphs || []).map((para, i) => (
                   <p
                     key={i}
-                    className={`font-body text-sm md:text-base leading-relaxed text-asila-body/85 ${
-                      i === 0 ? "text-base md:text-lg font-medium text-asila-body" : ""
+                    className={`font-body text-sm md:text-base leading-relaxed text-asila-muted ${
+                      i === 0 ? "text-base md:text-lg font-medium text-asila-text" : ""
                     }`}
                   >
                     {para}
@@ -154,15 +158,15 @@ export default function Home() {
             </ScrollFade>
 
             <ScrollFade delay={0.2}>
-              <div className="relative">
-                <div className={`absolute -top-3 ${lang === "he" ? "-left-3" : "-right-3"} w-full h-full border border-asila-gold/30 pointer-events-none`} />
-                <SmartImage
-                  src="/images/sunset/07.jpg"
-                  alt="Asila Invest — Koh Phangan"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="w-full aspect-[3/4] object-cover"
-                />
-              </div>
+              <img
+                src="/images/sunset/07.webp"
+                alt="ASILA Investments luxury development on Koh Phangan, Thailand"
+                className="w-full aspect-[3/4] object-cover"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="800"
+              />
             </ScrollFade>
           </div>
         </div>
@@ -170,9 +174,9 @@ export default function Home() {
         {/* Divider */}
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-gray-200" />
-            <div className="w-1.5 h-1.5 bg-asila-gold rotate-45" />
-            <div className="flex-1 h-px bg-gray-200" />
+            <div className="flex-1 h-px bg-asila-blue/30" />
+            <div className="w-1.5 h-1.5 bg-asila-gold/60 rotate-45" />
+            <div className="flex-1 h-px bg-asila-blue/30" />
           </div>
         </div>
 
@@ -180,33 +184,33 @@ export default function Home() {
         <div className="py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <ScrollFade>
-              <p className="font-body text-xs uppercase tracking-[0.25em] text-asila-gold mb-3">
+              <p className="font-body text-xs uppercase tracking-[0.25em] text-asila-gold/80 mb-3">
                 {lang === "he" ? "הכירו את המייסד" : "Meet the Founder"}
               </p>
-              <h2 className="font-heading text-3xl md:text-5xl font-medium text-asila-navy mb-10">
+              <h2 className="font-heading text-3xl md:text-5xl font-medium text-white mb-10">
                 {t.about.founderTitle}
               </h2>
             </ScrollFade>
 
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 md:gap-16 items-start">
               <ScrollFade>
-                <div className="relative">
-                  <div className={`absolute -top-3 ${lang === "he" ? "-right-3" : "-left-3"} w-full h-full border border-asila-gold/25 pointer-events-none`} />
-                  <SmartImage
-                    src="/images/eden.jpeg"
-                    alt="Eden Asila"
-                    sizes="(min-width: 768px) 300px, 100vw"
-                    className="w-full aspect-[3/4] object-cover object-top"
-                  />
-                </div>
+                <img
+                  src="https://media.base44.com/images/public/69dd2ec22657e2153222d859/888bc014c_WhatsAppImage2026-04-16at132508.jpg"
+                  alt="Eden Asila — Founder & Developer, ASILA Investments"
+                  className="w-full aspect-[3/4] object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="800"
+                />
               </ScrollFade>
 
               <ScrollFade delay={0.15}>
                 <div className="space-y-5 mt-2">
                   {(t.about.founderBioItems || []).map((item, i) => (
                     <div key={i} className={`flex gap-4 ${lang === "he" ? "flex-row-reverse" : ""}`}>
-                      <div className="mt-2 flex-shrink-0 w-1.5 h-1.5 bg-asila-gold rotate-45" />
-                      <p className="font-body text-sm md:text-base leading-relaxed text-asila-body/80">
+                      <div className="mt-2 flex-shrink-0 w-1.5 h-1.5 bg-asila-gold/60 rotate-45" />
+                      <p className="font-body text-sm md:text-base leading-relaxed text-asila-muted">
                         {item}
                       </p>
                     </div>

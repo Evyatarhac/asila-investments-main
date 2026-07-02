@@ -6,7 +6,6 @@ import projects, { getStatusLabel } from "../lib/projects";
 import Breadcrumb from "../components/Breadcrumb";
 import Lightbox from "../components/Lightbox";
 import ScrollFade from "../components/ScrollFade";
-import SmartImage from "../components/SmartImage";
 import useSEO, { SITE_URL } from "../lib/useSEO";
 
 const statusColors = {
@@ -24,20 +23,22 @@ export default function ProjectDetail() {
   const slug = window.location.pathname.split("/").pop();
   const project = projects.find((p) => p.slug === slug);
 
+  const seoDesc = project
+    ? (project.shortDescription[lang] || project.shortDescription.en)
+    : undefined;
+
   useSEO({
     path: `/projects/${slug}`,
     lang,
     noindex: !project,
-    type: "article",
     title: project
       ? (lang === "he"
           ? `${project.name} — נדל״ן יוקרה בקופנגן, תאילנד`
           : `${project.name} — Luxury Real Estate in Koh Phangan, Thailand`)
       : undefined,
-    description: project
-      ? (project.shortDescription[lang] || project.shortDescription.en)
-      : undefined,
+    description: seoDesc,
     image: project?.heroImage,
+    type: "article",
     jsonLd: project
       ? {
           "@context": "https://schema.org",
@@ -89,13 +90,10 @@ export default function ProjectDetail() {
       <section className="relative h-[60vh] md:h-[70vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 bg-asila-surface">
           {project.heroImage ? (
-            <SmartImage
+            <img
               src={project.heroImage}
               alt={project.name}
-              sizes="100vw"
               className="w-full h-full object-cover"
-              loading="eager"
-              fetchPriority="high"
               width="1920"
               height="1080"
             />
@@ -143,9 +141,19 @@ export default function ProjectDetail() {
               </h2>
 
               <div className="space-y-4 mb-8">
-                <DetailRow label={t.projects.location} value={project.location} />
+                {project.details && project.details[lang] && (
+                  <>
+                    <DetailRow label={lang === "he" ? "מספר וילות" : "Number of Villas"} value={project.details[lang].villas} />
+                    <DetailRow label={lang === "he" ? "סוג" : "Type"} value={project.details[lang].type} />
+                    <DetailRow label={t.projects.location} value={project.details[lang].locationDetail || project.location} />
+                    <DetailRow label={lang === "he" ? "חדרי שינה" : "Bedrooms"} value={project.details[lang].bedrooms} />
+                    <DetailRow label={lang === "he" ? "בריכה פרטית" : "Private Pool"} value={project.details[lang].pool} />
+                    {project.details[lang].features && (
+                      <DetailRow label={lang === "he" ? "מאפיינים" : "Key Features"} value={project.details[lang].features} />
+                    )}
+                  </>
+                )}
                 <DetailRow label={t.projects.status} value={getStatusLabel(project.status, lang)} />
-                <DetailRow label={t.projects.year} value={project.year} />
               </div>
 
               <div className="border-t border-asila-blue/20 pt-6">
@@ -177,7 +185,7 @@ export default function ProjectDetail() {
                     className="flex-shrink-0 w-56 aspect-[4/3] bg-asila-surface border border-asila-blue/10 overflow-hidden"
                   >
                     {img ? (
-                      <SmartImage src={img} alt={`${project.name} ${i + 1}`} sizes="224px" className="w-full h-full object-cover" loading="lazy" width="224" height="168" />
+                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" width="224" height="168" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}
@@ -196,7 +204,7 @@ export default function ProjectDetail() {
                     }`}
                   >
                     {img ? (
-                      <SmartImage src={img} alt={`${project.name} ${i + 1}`} sizes="(min-width: 1024px) 400px, 50vw" className="w-full h-full object-cover" loading="lazy" width="400" height="300" />
+                      <img src={img} alt={`${project.name} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="300" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-asila-muted/30 text-xs">Image {i + 1}</div>
                     )}

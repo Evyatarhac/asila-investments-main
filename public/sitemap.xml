@@ -8,7 +8,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/sunset/07-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/sunset/07.webp</image:loc>
       <image:title>ASILA Investments — Luxury real estate development, Koh Phangan</image:title>
     </image:image>
   </url>
@@ -26,7 +26,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/paradise/cover-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/paradise/cover.webp</image:loc>
       <image:title>Paradise — Luxury residential development, Koh Phangan</image:title>
     </image:image>
   </url>
@@ -37,7 +37,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/sunset/01-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/sunset/01.webp</image:loc>
       <image:title>Sunset — Premium sunset-view villas, Koh Phangan</image:title>
     </image:image>
   </url>
@@ -48,7 +48,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/coco/01-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/coco/01.webp</image:loc>
       <image:title>Coco — Boutique beachfront development, Koh Phangan</image:title>
     </image:image>
   </url>
@@ -59,7 +59,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/arias/01-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/arias/01.webp</image:loc>
       <image:title>Arias — Flagship mixed-use luxury development, Koh Phangan</image:title>
     </image:image>
   </url>
@@ -84,7 +84,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://asila.co.il/images/paradise/drone-lg.jpg</image:loc>
+      <image:loc>https://asila.co.il/images/paradise/drone.webp</image:loc>
       <image:title>The Complete Guide to Real Estate Investment in Koh Phangan</image:title>
     </image:image>
   </url>

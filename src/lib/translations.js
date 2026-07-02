@@ -132,7 +132,7 @@ const translations = {
       projectsBuilt: "פרויקטים",
       yearsExperience: "שנות ניסיון",
       countries: "מדינה",
-      founderTitle: "Eden Asila",
+      founderTitle: "עדן עסילה",
       founderRole: "מייסד ויזם",
       founderBioItems: [
         "יזם נדל״ן הפועל בתאילנד ומוביל פרויקטים באי קופנגן.",
