@@ -7,7 +7,6 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Layout from './components/Layout';
-import Home from './pages/Home';
 import HomeExperience from './pages/HomeExperience';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
@@ -41,7 +40,7 @@ const AuthenticatedApp = ({ splashDone, onVideoReady }) => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Home onVideoReady={onVideoReady} />} />
+        <Route path="/" element={<HomeExperience onVideoReady={onVideoReady} />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/sunset" element={<SunsetExperience />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />

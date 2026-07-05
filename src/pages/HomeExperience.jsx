@@ -22,7 +22,7 @@ const ML = (s) =>
     <React.Fragment key={i}>{line}{i < a.length - 1 && <br />}</React.Fragment>
   ));
 
-export default function HomeExperience() {
+export default function HomeExperience({ onVideoReady }) {
   const { lang } = useOutletContext();
   const scopeRef = useRef(null);
   const canvasRef = useRef(null); // unused (no drone canvas on home) — hook handles null
@@ -30,15 +30,14 @@ export default function HomeExperience() {
   const [enabled] = useState(
     () =>
       typeof window !== "undefined" &&
-      window.matchMedia("(min-width:768px)").matches &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 
   // no canvas act -> aerialCount 0; just preload the render descent so it doesn't flash
   useCinematicScroll({ enabled, scopeRef, canvasRef, aerialCount: 0, preload: PRELOAD });
 
-  // mobile / reduced-motion -> original home (video hero + all content)
-  if (!enabled) return <Home />;
+  // reduced-motion -> original home (video hero + all content)
+  if (!enabled) return <Home onVideoReady={onVideoReady} />;
 
   const he = lang === "he";
   const C = he
@@ -84,7 +83,7 @@ export default function HomeExperience() {
 
         {/* ACT 1 — VIDEO landing (plays, not scrubbed) */}
         <section className="cine-videohero">
-          <video className="cine-videobg" poster="/hero-poster.jpg" autoPlay muted loop playsInline preload="metadata">
+          <video className="cine-videobg" poster="/hero-poster.jpg" autoPlay muted loop playsInline preload="metadata" onCanPlay={() => onVideoReady?.()}>
             <source src="/hero.mp4" type="video/mp4" />
           </video>
           <div className="cine-grade" />
@@ -110,7 +109,6 @@ export default function HomeExperience() {
                 </div>
               ))}
             </div>
-            <div className="cine-doorway"><div className="cine-door cine-door-l" /><div className="cine-door cine-door-r" /></div>
             <div className="cine-grade" />
             <div className="cine-vignette" />
             {/* match-cut bloom at exterior->interior seam (slide 2 -> 3) */}

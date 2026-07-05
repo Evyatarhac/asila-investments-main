@@ -47,7 +47,6 @@ export default function SunsetExperience() {
   const [enabled] = useState(
     () =>
       typeof window !== "undefined" &&
-      window.matchMedia("(min-width:768px)").matches &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 
@@ -126,7 +125,6 @@ export default function SunsetExperience() {
                   </div>
                 ))}
               </div>
-              <div className="cine-doorway"><div className="cine-door cine-door-l" /><div className="cine-door cine-door-r" /></div>
               <div className="cine-grade" />
               <div className="cine-vignette" />
 

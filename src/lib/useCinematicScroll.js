@@ -142,38 +142,35 @@ export default function useCinematicScroll({ enabled, scopeRef, canvasRef, onPro
           const heroEl = hero.querySelector(".cine-sticky");
           const HERO_END = "+=" + Math.max(N, 1) * 900;
           const tl = gsap.timeline({ scrollTrigger: { trigger: heroEl, start: "top top", end: HERO_END, scrub: 0.7, pin: heroEl, pinSpacing: true } });
-          const doorL = hero.querySelector(".cine-door-l");
-          const doorR = hero.querySelector(".cine-door-r");
+          // lighter effect on touch devices: no blur (GPU-expensive), softer zoom
+          const touch = window.matchMedia("(pointer:coarse)").matches;
+          const OUT_SCALE = touch ? 1.7 : 2.0;
+          const OUT_BLUR = touch ? "blur(0px)" : "blur(4px)";
+          const IN_BLUR = touch ? "blur(0px)" : "blur(3px)";
 
           // initial states (one timeline unit per slide; seam at each integer)
           slides.forEach((s, i) => {
             gsap.set(s, { opacity: i === 0 ? 1 : 0 });
-            gsap.set(s.querySelector(".cine-img"), { scale: i === 0 ? 1 : 1.12, transformOrigin: "50% 48%" });
+            gsap.set(s.querySelector(".cine-img"), { scale: i === 0 ? 1 : 1.22, filter: "blur(0px)", transformOrigin: "50% 48%" });
           });
-          if (doorL) gsap.set(doorL, { rotationY: -118, opacity: 0, transformOrigin: "left center" });
-          if (doorR) gsap.set(doorR, { rotationY: 118, opacity: 0, transformOrigin: "right center" });
 
           // first room: gentle drift
-          tl.to(slides[0].querySelector(".cine-img"), { scale: 1.1, duration: 0.85, ease: "sine.inOut" }, 0.1);
+          tl.to(slides[0].querySelector(".cine-img"), { scale: 1.08, duration: 0.85, ease: "sine.inOut" }, 0.1);
 
-          // room-to-room: doors CLOSE over the seam, rooms swap behind them, doors SWING OPEN into the next room
+          // room-to-room: step INTO the frame — outgoing zooms past the camera while the next room snaps into focus
           for (let i = 1; i < N; i++) {
             const prev = slides[i - 1];
+            const prevImg = prev.querySelector(".cine-img");
             const cur = slides[i];
             const curImg = cur.querySelector(".cine-img");
-            if (doorL) {
-              tl.to(doorL, { rotationY: 0, opacity: 1, duration: 0.3, ease: "power2.in" }, i - 0.5)
-                .to(doorR, { rotationY: 0, opacity: 1, duration: 0.3, ease: "power2.in" }, i - 0.5);
-            }
-            // swap rooms while hidden behind the closed doors
-            tl.set(prev, { opacity: 0 }, i - 0.16);
-            tl.set(cur, { opacity: 1 }, i - 0.16);
-            tl.fromTo(curImg, { scale: 1.18 }, { scale: 1.0, duration: 0.85, ease: "power2.out" }, i - 0.16); // step forward into the room
-            if (doorL) {
-              tl.to(doorL, { rotationY: -118, opacity: 0, duration: 0.5, ease: "power3.out" }, i - 0.02)
-                .to(doorR, { rotationY: 118, opacity: 0, duration: 0.5, ease: "power3.out" }, i - 0.02);
-            }
-            tl.to(curImg, { scale: 1.1, duration: 0.7, ease: "sine.inOut" }, i + 0.4); // settle / drift in the room
+            // outgoing: dive forward through it
+            tl.to(prevImg, { scale: OUT_SCALE, filter: OUT_BLUR, duration: 0.44, ease: "power2.in" }, i - 0.44);
+            tl.to(prev, { opacity: 0, duration: 0.26, ease: "power1.in" }, i - 0.26);
+            // incoming: emerges from depth and snaps sharp
+            tl.fromTo(cur, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, i - 0.3);
+            tl.fromTo(curImg, { scale: 1.22, filter: IN_BLUR }, { scale: 1.0, filter: "blur(0px)", duration: 0.56, ease: "power3.out" }, i - 0.3);
+            // settle / drift while in the room
+            tl.to(curImg, { scale: 1.08, duration: 0.7, ease: "sine.inOut" }, i + 0.3);
           }
           addBeats(hero, tl);
         }
@@ -209,6 +206,5 @@ export default function useCinematicScroll({ enabled, scopeRef, canvasRef, onPro
       if (tickFn) gsap.ticker.remove(tickFn);
       if (lenis) lenis.destroy();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled]);
 }
